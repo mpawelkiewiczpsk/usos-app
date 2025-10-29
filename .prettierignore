@@ -1,0 +1,11 @@
+# Zależności
+/node_modules
+
+# Foldery buildów Expo
+.expo/
+.expo-shared/
+web-build/
+
+# Inne
+/coverage
+*.lock
