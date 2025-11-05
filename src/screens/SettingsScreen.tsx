@@ -1,15 +1,20 @@
-import { View, Text } from 'react-native';
-
-function SettingsScreen({ route }) {
-  const { personName, itemId } = route.params;
-
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { RouteProp, useRoute } from '@react-navigation/native';
+import type { AppTabsParamList } from '../navigation/types';
+type Route = RouteProp<AppTabsParamList, 'Settings'>;
+export default function SettingsScreen() {
+  const route = useRoute<Route>();
+  const section = route.params?.section ?? 'general';
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Settings Screen</Text>
-      <Text>{personName}</Text>
-      <Text>{itemId}</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Settings</Text>
+      <Text style={styles.text}>Section: {section}</Text>
     </View>
   );
 }
-
-export default SettingsScreen;
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: '#0f1420', padding: 24, justifyContent: 'center' },
+  title: { color: '#e8eaed', fontSize: 22, fontWeight: '700', marginBottom: 12 },
+  text: { color: '#e8eaed' },
+});

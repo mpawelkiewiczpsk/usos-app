@@ -1,26 +1,19 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../navigation/types';
-import { StackActions } from '@react-navigation/native';
-
-type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
-export default function LoginScreen({ navigation }: Props) {
-  const onLogin = () => {
-    navigation.reset({
-      index: 0,
-      routes: [
-        {
-          name: 'AppTabs',
-        },
-      ],
-    });
+type Nav = NativeStackNavigationProp<RootStackParamList, 'AppTabs'>;
+export default function HomeScreen() {
+  const navigation = useNavigation<Nav>();
+  const openProfile = () => {
+    navigation.navigate('ProfileDetails', { userId: 'user_123' });
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login screen</Text>
-      <TouchableOpacity style={styles.btn} onPress={onLogin}>
-        <Text style={styles.btnText}>Enter the app</Text>
+      <Text style={styles.title}>Home</Text>
+      <TouchableOpacity style={styles.btn} onPress={openProfile}>
+        <Text style={styles.btnText}>Show profile user_12</Text>
       </TouchableOpacity>
     </View>
   );
