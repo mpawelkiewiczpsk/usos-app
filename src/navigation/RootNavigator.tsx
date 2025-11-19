@@ -7,6 +7,7 @@ import {
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import type { RootStackParamList, AppTabsParamList } from './types';
 import LoginScreen from '../screens/LoginScreen';
+import RegisterScreen from '../screens/RegisterScreen';
 import HomeScreen from '../screens/HomeScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import ProfileDetailsScreen from '../screens/ProfileScreen';
@@ -62,6 +63,7 @@ export default function RootNavigator() {
     <NavigationContainer theme={isDark ? AppDarkTheme : DefaultTheme}>
       <Stack.Navigator screenOptions={screenOptions} initialRouteName="Login">
         <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Sign in' }} />
+        <Stack.Screen name="Register" component={RegisterScreen} options={{ title: 'Register' }} />
         <Stack.Screen name="AppTabs" component={RootTabs} options={{ headerShown: false }} />
         <Stack.Screen
           name="ProfileDetails"

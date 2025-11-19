@@ -10,3 +10,14 @@ export const loginFunc = (email: string, pwd: string) => {
       console.log(error);
     });
 };
+
+export const registerFunc = (email: string, pwd: string) => {
+  return instance
+    .post(`users`, { id: '3', login: email, password: pwd })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};

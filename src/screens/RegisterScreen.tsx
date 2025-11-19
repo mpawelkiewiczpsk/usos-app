@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Pressable } from 'react-native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import type { RootStackParamList } from '../navigation/types';
-import { loginFunc } from '../api/auth';
+import { registerFunc } from '../api/auth';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 const COLORS = {
   bg: '#0f1420',
   card: '#121a2a',
@@ -15,7 +12,7 @@ const COLORS = {
   subtext: '#a8b0bd',
   primary: '#4c9aff',
 };
-export default function LoginScreen({ navigation }: Props) {
+export default function RegisterScreen() {
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
   const [showPwd, setShowPwd] = useState(false);
@@ -23,19 +20,14 @@ export default function LoginScreen({ navigation }: Props) {
   const onLogin = () => {
     if (!canLogin) return;
 
-    loginFunc(email, pwd).then((result: any) => {
-      if (result.length > 0) {
-        navigation.replace('AppTabs');
-      } else {
-        alert('Login failed.');
-      }
-    });
+    registerFunc(email, pwd)
+      .then(() => {
+        alert('Register correct');
+      })
+      .catch(() => {
+        alert('Register failed');
+      });
   };
-
-  const onRegister = () => {
-    navigation.navigate('Register');
-  };
-
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.bg }}>
       <View style={styles.container}>
@@ -43,8 +35,7 @@ export default function LoginScreen({ navigation }: Props) {
           <View style={styles.logoWrap}>
             <Ionicons name="sparkles-outline" size={28} color={COLORS.primary} />
           </View>
-          <Text style={styles.title}>Zaloguj się</Text>
-          <Text style={styles.subtitle}>Witaj ponownie</Text>
+          <Text style={styles.title}>Register</Text>
         </View>
         <View style={styles.card}>
           <Text style={styles.label}>E-mail</Text>
@@ -88,10 +79,6 @@ export default function LoginScreen({ navigation }: Props) {
             android_ripple={{ color: 'rgba(0,0,0,0.12)' }}
             style={[styles.btn, !canLogin && { opacity: 0.5 }]}
           >
-            <Text style={styles.btnText}>Login</Text>
-          </Pressable>
-
-          <Pressable onPress={onRegister} style={styles.btn}>
             <Text style={styles.btnText}>Register</Text>
           </Pressable>
         </View>

@@ -1,5 +1,6 @@
 export type RootStackParamList = {
   Login: undefined;
+  Register: undefined;
   AppTabs: undefined;
   ProfileDetails: { userId: string };
 };
